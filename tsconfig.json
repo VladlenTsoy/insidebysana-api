@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es2021",
+    "noImplicitAny": false,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "strictPropertyInitialization": false,
+    "lib": [
+      "es2021"
+    ],
+    "paths": {
+      "*": [
+        "node_modules/*",
+        "src/*",
+        "src/app/*",
+        "src/app/http/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "src/resources/locales/*.json"
+  ],
+  "typeRoots": [
+    "src/types",
+    "./node_modules/@types"
+  ]
+}
