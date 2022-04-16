@@ -29,7 +29,7 @@ export class Client extends Model {
     }
 
     static get relationMappings() {
-        const {Source} = require("../models/settings/Source")
+        const {Source} = require("./settings/Source")
 
         return {
             source: {
