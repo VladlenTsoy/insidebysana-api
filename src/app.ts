@@ -20,19 +20,19 @@ app.use(express.urlencoded({extended: false}))
 app.use(express.static(path.join(__dirname, "public")))
 app.use(express.static(path.join(__dirname, "resources")))
 
-// import userRouter from "./routes/user"
-// import clientRouter from "./routes/client"
+import userRouter from "routes/api/user"
+import clientRouter from "routes/api/client"
 // import cashierRouter from "./routes/cashier"
 // import managerRouter from "./routes/manager"
 import adminRouter from "routes/admin"
 // import facebookRouter from "./routes/facebook"
 
 /* Промежуточная проверка */
-// import clientPassportMiddleware from "middleware/client-password.middleware"
+import clientPassportMiddleware from "middleware/client-password.middleware"
 import staffPassportMiddleware from "middleware/staff-passport.middleware"
 
-// app.use("/api/client", clientPassportMiddleware, clientRouter)
-// app.use("/api/user", staffPassportMiddleware, userRouter)
+app.use("/api/client", clientPassportMiddleware, clientRouter)
+app.use("/api/user", staffPassportMiddleware, userRouter)
 // app.use("/api/user/cashier", staffPassportMiddleware, cashierRouter)
 // app.use("/api/user/manager", staffPassportMiddleware, managerRouter)
 app.use("/api/user/admin", staffPassportMiddleware, adminRouter)
