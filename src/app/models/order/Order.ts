@@ -8,6 +8,7 @@ export class Order extends Model {
     total!: number
     created_at!: string
     updated_at!: string
+    payment_state: number
 
     static get relationMappings() {
         const {Client} = require("../Client")

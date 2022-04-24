@@ -1,6 +1,5 @@
-const {Source} = require('models/settings/Source')
-const {logger} = require("config/logger.config")
-const {body, validationResult} = require('express-validator');
+import {Source} from "models/settings/Source"
+import {body, validationResult} from "express-validator"
 
 /**
  * Вывод всех
@@ -10,18 +9,13 @@ const {body, validationResult} = require('express-validator');
  * @constructor
  */
 const GetAll = async (req, res) => {
-    try {
-        const sources = await Source.query()
-            .select('id', 'title')
-        return res.send(sources)
-    } catch (e) {
-        logger.error(e.stack)
-        return res.status(500).send({message: e.message})
-    }
+    const sources = await Source.query()
+        .select("id", "title")
+    return res.send(sources)
 }
 
 const CreateValidate = [
-    body('title').not().isEmpty().withMessage('Введите название ресурса!'),
+    body("title").not().isEmpty().withMessage("Введите название ресурса!")
 ]
 
 /**
@@ -33,19 +27,14 @@ const CreateValidate = [
  */
 const Create = async (req, res) => {
     // Ошибка валидации
-    const errors = validationResult(req);
+    const errors = validationResult(req)
     if (!errors.isEmpty())
-        return res.status(422).json({errors: errors.array()});
+        return res.status(422).json({errors: errors.array()})
 
-    try {
-        const {title} = req.body
-        const source = await Source.query()
-            .insertAndFetch({title})
-        return res.send(source)
-    } catch (e) {
-        logger.error(e.stack)
-        return res.status(500).send({message: e.message})
-    }
+    const {title} = req.body
+    const source = await Source.query<any>()
+        .insertAndFetch({title})
+    return res.send(source)
 }
 
 /**
@@ -57,20 +46,15 @@ const Create = async (req, res) => {
  */
 const EditById = async (req, res) => {
     // Ошибка валидации
-    const errors = validationResult(req);
+    const errors = validationResult(req)
     if (!errors.isEmpty())
-        return res.status(422).json({errors: errors.array()});
+        return res.status(422).json({errors: errors.array()})
 
-    try {
-        const {id} = req.params
-        const {title} = req.body
-        const source = await Source.query()
-            .updateAndFetchById(id, {title})
-        return res.send(source)
-    } catch (e) {
-        logger.error(e.stack)
-        return res.status(500).send({message: e.message})
-    }
+    const {id} = req.params
+    const {title} = req.body
+    const source = await Source.query<any>()
+        .updateAndFetchById(id, {title})
+    return res.send(source)
 }
 
-module.exports = {GetAll, Create, CreateValidate, EditById}
+export default {GetAll, Create, CreateValidate, EditById}

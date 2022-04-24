@@ -16,7 +16,8 @@ export default {
         }
     },
     // Вывод ошибки
-    errorHandler: (err: Error, req: Request, res: Response) => {
-        return res.status(500).send({error: err.message})
+    errorHandler: (err: Error, req: Request, res: Response, next) => {
+        res.status(500).send({error: err.message})
+        next()
     }
 }

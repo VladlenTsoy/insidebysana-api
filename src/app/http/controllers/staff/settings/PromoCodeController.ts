@@ -65,4 +65,4 @@ const Edit = async (req, res) => {
     return res.send(promoCode)
 }
 
-module.exports = {GetAll, CreateValidate, Create, Edit}
+export default {GetAll, CreateValidate, Create, Edit}

@@ -108,7 +108,7 @@ export default {
         response.revenueByDay = await revenueByDay
 
 
-        const numberOfPositions = OrderProductColor.query()
+        const numberOfPositions = OrderProductColor.query<any>()
             .count("*", {as: "total"})
 
         if (dateFrom && dateTo)

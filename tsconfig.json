@@ -21,6 +21,9 @@
         "src/*",
         "src/app/*",
         "src/app/http/*"
+      ],
+      "@events": [
+        "src/app/events/*"
       ]
     }
   },

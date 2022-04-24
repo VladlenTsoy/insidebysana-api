@@ -9,7 +9,7 @@ export default {
      * @param clientId
      * @param remember
      */
-    create: async (clientId, remember) => {
+    create: async (clientId, remember?: string) => {
         const hash = md5(clientId + moment().toISOString())
 
         // Создание токена
