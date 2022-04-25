@@ -25,7 +25,7 @@ import clientRouter from "routes/api/client"
 // import cashierRouter from "./routes/cashier"
 // import managerRouter from "./routes/manager"
 import adminRouter from "routes/admin"
-// import facebookRouter from "./routes/facebook"
+import facebookRouter from "routes/api/facebook"
 
 /* Промежуточная проверка */
 import clientPassportMiddleware from "middleware/client-password.middleware"
@@ -36,7 +36,7 @@ app.use("/api/user", staffPassportMiddleware, userRouter)
 // app.use("/api/user/cashier", staffPassportMiddleware, cashierRouter)
 // app.use("/api/user/manager", staffPassportMiddleware, managerRouter)
 app.use("/api/user/admin", staffPassportMiddleware, adminRouter)
-// app.use("/api/facebook", facebookRouter)
+app.use("/api/facebook", facebookRouter)
 
 app.use(errorConfig.logErrors)
 app.use(errorConfig.clientErrorHandler)
