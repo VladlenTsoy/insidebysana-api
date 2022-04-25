@@ -7,7 +7,7 @@ import * as SMSTemplateService from "services/SMSTemplateService"
 const eventEmitter = new events.EventEmitter()
 
 /**
- * События при создание сделки
+ * События при создании сделки
  * @param {*} param0
  */
 const CreateHandler = async ({status_id, client, order_id}) => {
@@ -45,8 +45,8 @@ const CreateHandler = async ({status_id, client, order_id}) => {
                 })
 
                 if (updateMessage)
-                    // Отпрака сообщения
-                    SendMessageQueue({
+                    // Отправка сообщения
+                    await SendMessageQueue({
                         phone: client.phone,
                         message: updateMessage,
                         timeout: smsAction.timeout

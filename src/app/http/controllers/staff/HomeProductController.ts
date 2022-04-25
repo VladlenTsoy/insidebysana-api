@@ -1,5 +1,6 @@
 import {ProductHomePosition} from "models/product/ProductHomePosition"
 import {ProductColor} from "models/product/ProductColor"
+import {map} from "lodash/fp"
 
 /**
  * Вывод всех продуктов для дом. страницы
@@ -94,7 +95,8 @@ const Delete = async (req, res) => {
 
 const GetFree = async (req, res) => {
     const {position} = req.params
-    const positions = await ProductHomePosition.query<any>().pluck("position")
+    const positions = await ProductHomePosition.query<any>()
+        .then(map("position"))
     const allPositions = Array.from({length: 24}, (_, i) => i + 1)
     const freePositions = allPositions.filter(
         _position => (position !== 0 && _position === Number(position)) || !positions.includes(_position)

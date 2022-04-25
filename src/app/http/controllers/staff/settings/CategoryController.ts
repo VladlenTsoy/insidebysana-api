@@ -1,5 +1,6 @@
 import {Category} from "models/settings/Category"
 import {Product} from "models/product/Product"
+import {map} from "lodash/fp"
 
 /**
  * Вывод активных
@@ -13,7 +14,7 @@ const GetByActive = async (req, res) => {
         .whereNotNull("category_id")
         .select("category_id")
         .distinct("category_id")
-        .pluck("category_id")
+        .then(map("category_id"))
 
     const categories = await Category.query<any>()
         .whereNull("hide_id")

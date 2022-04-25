@@ -4,6 +4,7 @@ import {Category} from "models/settings/Category"
 import {Color} from "models/settings/Color"
 import {body, validationResult} from "express-validator"
 import {ProductHomePosition} from "models/product/ProductHomePosition"
+import {map} from "lodash/fp"
 
 const _getFilters = async ({
                                colorIds,
@@ -44,7 +45,7 @@ const _getFilters = async ({
         .modify("filterPrice", price)
         .join("products", "products.id", "product_colors.product_id")
         .select("products.category_id")
-        .pluck("category_id")
+        .then(map("category_id"))
     response.categories = await Category.query()
         .whereIn("id", productCategoryIds)
         .select("id", "title")
@@ -57,8 +58,7 @@ const _getFilters = async ({
         .modify("filterPrice", price)
         .where("product_colors.status", "published")
         .select("color_id")
-        // @ts-ignore
-        .pluck("color_id")
+        .then(map("color_id"))
     //
     response.colors = await Color.query()
         .whereIn("id", productColorIds)
@@ -329,7 +329,8 @@ const GetByRecentIds = async (req, res) => {
 
 const GetIds = async (req, res) => {
     // @ts-config
-    const products = await ProductColor.query<any>().pluck("id")
+    const products = await ProductColor.query<any>()
+        .then(map("id"))
     return res.send(products)
 }
 
