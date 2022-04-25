@@ -1,5 +1,6 @@
 import Model from "config/knex.config"
 import moment from "moment"
+import {FacebookChatMessage} from "./FacebookChatMessage"
 
 export class FacebookChat extends Model {
     static tableName = "facebook_chats"
@@ -9,7 +10,6 @@ export class FacebookChat extends Model {
     updated_at: string
 
     static get relationMappings() {
-        const {FacebookChatMessage} = require("./FacebookChatMessage")
         return {
             new_messages: {
                 filter: query => query.where({user_id: null, read_at: null}),

@@ -1,5 +1,13 @@
 import Model from "config/knex.config"
 import moment from "moment"
+import {Client} from "models/Client"
+import {User} from "models/User"
+import {Status} from "./Status"
+import {Delivery} from "models/settings/Delivery"
+import {OrderAddress} from "./OrderAddress"
+import {OrderPayment} from "./OrderPayment"
+import {OrderAdditionalService} from "./OrderAdditionalService"
+import {ProductColor} from "models/product/ProductColor"
 
 export class Order extends Model {
     static tableName = "orders"
@@ -11,15 +19,6 @@ export class Order extends Model {
     payment_state: number
 
     static get relationMappings() {
-        const {Client} = require("../Client")
-        const {User} = require("../User")
-        const {Status} = require("./Status")
-        const {Delivery} = require("../settings/Delivery")
-        const {OrderAddress} = require("./OrderAddress")
-        const {OrderPayment} = require("./OrderPayment")
-        const {OrderAdditionalService} = require("./OrderAdditionalService")
-        const {ProductColor} = require("../products/ProductColor")
-
         return {
             client: {
                 filter: query => query.select("clients.id", "clients.full_name", "clients.phone"),

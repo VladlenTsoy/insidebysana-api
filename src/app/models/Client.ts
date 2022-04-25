@@ -1,11 +1,16 @@
 import Model from "config/knex.config"
 import moment from "moment"
-
-const Password = require("objection-password")()
+import {Source} from "./settings/Source"
+import Password from "objection-password"
 
 export class Client extends Model {
     static tableName = "clients"
     static hidden = ["password", "updated_at"]
+    id: number
+    full_name: string
+    email: string
+    password: string
+    source_id: number
     created_at: string
     updated_at: string
 
@@ -29,8 +34,6 @@ export class Client extends Model {
     }
 
     static get relationMappings() {
-        const {Source} = require("./settings/Source")
-
         return {
             source: {
                 filter: query => query.select("sources.id", "sources.title"),
@@ -54,4 +57,4 @@ export class Client extends Model {
     }
 }
 
-export const ClientPassword = Password(Client)
+export const ClientPassword = Password()(Client)

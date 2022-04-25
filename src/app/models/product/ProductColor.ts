@@ -1,6 +1,13 @@
 import Model from "config/knex.config"
 import moment from "moment"
 import {raw} from "objection"
+import {Product} from "./Product"
+import {ProductColorImage} from "./ProductColorImage"
+import {Color} from "models/settings/Color"
+import {Category} from "models/settings/Category"
+import {ProductDiscount} from "./ProductDiscount"
+import {ProductMeasurement} from "./ProductMeasurement"
+import {ProductSize} from "./ProductSize"
 
 export class ProductColor extends Model {
     static tableName = "product_colors"
@@ -128,14 +135,6 @@ export class ProductColor extends Model {
     }
 
     static get relationMappings() {
-        const {Product} = require("./Product")
-        const {ProductColorImage} = require("./ProductColorImage")
-        const {Color} = require("../settings/Color")
-        const {Category} = require("../settings/Category")
-        const {ProductDiscount} = require("./ProductDiscount")
-        const {ProductMeasurement} = require("./ProductMeasurement")
-        const {ProductSize} = require("./ProductSize")
-
         return {
             details: {
                 filter: query => query.select("products.id", "products.price"),

@@ -1,5 +1,6 @@
 import Model from "config/knex.config"
 import moment from "moment"
+import {ProductColor} from "models/product/ProductColor"
 
 export class PrintProduct extends Model {
     static tableName = "print_products"
@@ -19,8 +20,6 @@ export class PrintProduct extends Model {
     }
 
     static get relationMappings() {
-        const {ProductColor} = require("../products/ProductColor")
-
         return {
             //
             product_color: {

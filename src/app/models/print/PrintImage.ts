@@ -1,5 +1,6 @@
 import Model from "config/knex.config"
 import moment from "moment"
+import {PrintCategory} from "./PrintCategory"
 
 export class PrintImage extends Model {
     static tableName = "print_images"
@@ -19,8 +20,6 @@ export class PrintImage extends Model {
     }
 
     static get relationMappings() {
-        const {PrintCategory} = require("./PrintCategory")
-
         return {
             // Категория
             category: {

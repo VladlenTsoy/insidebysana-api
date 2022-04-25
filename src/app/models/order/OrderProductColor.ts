@@ -1,5 +1,7 @@
 import Model from "config/knex.config"
 import moment from "moment"
+import {ProductColor} from "models/product/ProductColor"
+import {Size} from "models/settings/Size"
 
 export class OrderProductColor extends Model {
     static tableName = "order_product_colors"
@@ -7,9 +9,6 @@ export class OrderProductColor extends Model {
     updated_at: string
 
     static get relationMappings() {
-        const {ProductColor} = require("../products/ProductColor")
-        const {Size} = require("../settings/Size")
-
         return {
             product: {
                 filter: query => query.withGraphFetched("sizes").select("id", "thumbnail", "product_id", "title"),
