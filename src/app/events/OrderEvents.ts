@@ -2,6 +2,7 @@ import events from "events"
 import {SendMessageQueue} from "jobs/SendMessageQueue"
 import {Status} from "models/order/Status"
 import {io} from "config/socket.config"
+import OrderService from "services/order/OrderService"
 import * as SMSTemplateService from "services/SMSTemplateService"
 
 const eventEmitter = new events.EventEmitter()
@@ -13,7 +14,6 @@ const eventEmitter = new events.EventEmitter()
 const CreateHandler = async ({status_id, client, order_id}) => {
     if (!order_id) return
 
-    const OrderService = require("services/order/OrderService")
     const ref = OrderService.SelectOrderForAdminRef()
     const order = await ref.findById(order_id)
 
@@ -63,7 +63,6 @@ eventEmitter.on("create_order_event", CreateHandler)
  * @param {*} param0
  */
 const ChangePaymentStateHandler = async ({orderId, paymentState}) => {
-    const OrderService = require("services/order/OrderService")
     const ref = OrderService.SelectOrderRef()
     const order = await ref.updateAndFetchById(orderId, {payment_state: paymentState})
 
@@ -78,7 +77,6 @@ eventEmitter.on("change_payment_state_order_event", ChangePaymentStateHandler)
  * @param {*} param0
  */
 const UpdateStatusHandler = async ({orderId}) => {
-    const OrderService = require("services/order/OrderService")
     const ref = OrderService.SelectOrderRef()
     const order = await ref.findById(orderId)
 
