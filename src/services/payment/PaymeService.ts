@@ -308,7 +308,7 @@ export class PaymeService {
 
                 // Обновление ордера
                 await Order.query().findById(transaction.order_id).update({payment_state: -1})
-                await OrderEvents.eventEmitter.emit("create_order_event", {
+                OrderEvents.eventEmitter.emit("create_order_event", {
                     orderId: transaction.order_id,
                     paymentState: -1
                 })
