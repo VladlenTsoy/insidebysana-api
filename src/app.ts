@@ -20,6 +20,7 @@ app.use(express.urlencoded({extended: false}))
 app.use(express.static(path.join(__dirname, "public")))
 app.use(express.static(path.join(__dirname, "resources")))
 
+import apiRouter from "routes/api/api"
 import userRouter from "routes/api/user"
 import clientRouter from "routes/api/client"
 // import cashierRouter from "./routes/cashier"
@@ -31,6 +32,7 @@ import facebookRouter from "routes/api/facebook"
 import clientPassportMiddleware from "middleware/client-password.middleware"
 import staffPassportMiddleware from "middleware/staff-passport.middleware"
 
+app.use("/api", apiRouter)
 app.use("/api/client", clientPassportMiddleware, clientRouter)
 app.use("/api/user", staffPassportMiddleware, userRouter)
 // app.use("/api/user/cashier", staffPassportMiddleware, cashierRouter)
