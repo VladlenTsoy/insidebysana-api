@@ -4,9 +4,21 @@ import express from "express"
 import path from "path"
 import logger from "morgan"
 import {corsConfig} from "config/cors.config"
-import {socketConfig} from "config/socket.config"
+import {socketConfig, io} from "config/socket.config"
 import i18n from "config/i18n.config"
 import errorConfig from "config/error.config"
+import {socketPassport} from "middleware/socket.middleware"
+import apiRouter from "routes/api/api"
+import userRouter from "routes/api/user"
+import clientRouter from "routes/api/client"
+// import cashierRouter from "./routes/cashier"
+// import managerRouter from "./routes/manager"
+import adminRouter from "routes/admin"
+import facebookRouter from "routes/api/facebook"
+/* Промежуточная проверка */
+import clientPassportMiddleware from "middleware/client-password.middleware"
+import staffPassportMiddleware from "middleware/staff-passport.middleware"
+import channels from "channels"
 
 export const app = express()
 
@@ -20,17 +32,12 @@ app.use(express.urlencoded({extended: false}))
 app.use(express.static(path.join(__dirname, "public")))
 app.use(express.static(path.join(__dirname, "resources")))
 
-import apiRouter from "routes/api/api"
-import userRouter from "routes/api/user"
-import clientRouter from "routes/api/client"
-// import cashierRouter from "./routes/cashier"
-// import managerRouter from "./routes/manager"
-import adminRouter from "routes/admin"
-import facebookRouter from "routes/api/facebook"
 
-/* Промежуточная проверка */
-import clientPassportMiddleware from "middleware/client-password.middleware"
-import staffPassportMiddleware from "middleware/staff-passport.middleware"
+/* Сокеты */
+// @ts-ignore
+io.use(socketPassport)
+io.on("connection", channels)
+
 
 app.use("/api", apiRouter)
 app.use("/api/client", clientPassportMiddleware, clientRouter)

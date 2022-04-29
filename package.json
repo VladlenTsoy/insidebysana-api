@@ -9,6 +9,7 @@
     "@root": "./",
     "app": "dist/app",
     "config": "dist/config",
+    "channels": "dist/channels",
     "models": "dist/app/models",
     "jobs": "dist/app/jobs",
     "services": "dist/services",
