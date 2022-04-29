@@ -1,6 +1,6 @@
 import {StaffOauthAccessToken} from "models/auth/StaffOauthAccessToken"
 import jwt from "jsonwebtoken"
-import moment from "moment" // require
+import moment from "moment"
 import md5 from "md5"
 
 export default {

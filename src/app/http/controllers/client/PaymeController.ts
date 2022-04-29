@@ -1,8 +1,8 @@
-const {PaymeService} = require("services/payment/PaymeService")
+import {PaymeService} from "services/payment/PaymeService"
 
 const Index = async (req, res) => {
-    const paymeSerive = new PaymeService(req, res)
-    return await paymeSerive.Run()
+    const paymeService = new PaymeService(req, res)
+    return await paymeService.Run()
 }
 
 export default {Index}

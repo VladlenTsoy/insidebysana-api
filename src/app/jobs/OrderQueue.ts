@@ -1,12 +1,12 @@
 import Bull from "bull"
 import {defaultJobOptions} from "config/bull-queue.config"
+import OrderService from "services/order/OrderService"
 
 // Очередь на добавление адреса к сделке
 const AddAddressToOrder = new Bull("AddAddressToOrder", defaultJobOptions)
 
 // Действие очереди
 AddAddressToOrder.process(async ({data}) => {
-    const OrderService = require("services/order/OrderService")
     const {orderId, information} = data
     await OrderService.AddAddressToOrder(orderId, information)
 })
@@ -16,7 +16,6 @@ const AddProductsToOrder = new Bull("AddProductsToOrder", defaultJobOptions)
 
 // Действие очереди
 AddProductsToOrder.process(async ({data}) => {
-    const OrderService = require("services/order/OrderService")
     const {orderId, products} = data
     await OrderService.AddProductsToOrder(orderId, products)
 })
@@ -29,7 +28,6 @@ const AddAdditionalServiceToOrder = new Bull(
 
 // Действие очереди
 AddAdditionalServiceToOrder.process(async ({data}) => {
-    const OrderService = require("services/order/OrderService")
     const {orderId, additionalServices} = data
     await OrderService.AddAdditionalServicesToOrder(orderId, additionalServices)
 })
@@ -39,7 +37,6 @@ const AddPaymentsToOrder = new Bull("AddPaymentsToOrder", defaultJobOptions)
 
 // Действие очереди
 AddPaymentsToOrder.process(async ({data}) => {
-    const OrderService = require("services/order/OrderService")
     const {orderId, payments} = data
     await OrderService.AddPaymentsToOrder(orderId, payments)
 })
@@ -52,7 +49,6 @@ const UpdateStatusAndPositionToOrder = new Bull(
 
 // Действие очереди
 UpdateStatusAndPositionToOrder.process(async ({data}: any) => {
-    const OrderService = require("services/order/OrderService")
     await OrderService.UpdateStatusAndPosition(data)
 })
 
@@ -66,7 +62,6 @@ const AddTimerForCancelOrder = orderId => {
     // Действие очереди
     BullTimerForCancelOrder.process(async ({data}) => {
         try {
-            const OrderService = require("services/order/OrderService")
             const {orderId} = data
             await OrderService.AddTimerForCancelOrder(orderId)
         } catch (e) {
