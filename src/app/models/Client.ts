@@ -24,10 +24,10 @@ export class Client extends Model {
             search(builder, search) {
                 if (search.trim() !== "")
                     builder.where((_builder) => {
-                        _builder.where("id", "LIKE", `%${search}%`)
-                            .orWhere("full_name", "LIKE", `%${search}%`)
-                            .orWhere("phone", "LIKE", `%${search}%`)
-                            .orWhere("email", "LIKE", `%${search}%`)
+                        _builder.where("clients.id", "LIKE", `%${search}%`)
+                            .orWhere("clients.full_name", "LIKE", `%${search}%`)
+                            .orWhere("clients.phone", "LIKE", `%${search}%`)
+                            .orWhere("clients.email", "LIKE", `%${search}%`)
                     })
             }
         }

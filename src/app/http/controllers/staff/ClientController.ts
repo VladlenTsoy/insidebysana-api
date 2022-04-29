@@ -123,7 +123,7 @@ const GetProductsByCart = async (req, res) => {
                     .select(
                         "product_colors.id",
                         "product_colors.thumbnail",
-                        "products.title",
+                        "product_colors.title",
                         "products.category_id",
                         "products.price"
                     )
@@ -172,7 +172,7 @@ const GetProductsByWishlist = async (req, res) => {
             .select(
                 "product_colors.id",
                 "product_colors.thumbnail",
-                "products.title",
+                "product_colors.title",
                 "products.category_id",
                 "products.price"
             )
