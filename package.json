@@ -1,5 +1,6 @@
 {
   "main": "dist/bin/www.js",
+  "engines": { "node": "16.13.2" },
   "scripts": {
     "build": "tsc",
     "start": "tsc & node .",
