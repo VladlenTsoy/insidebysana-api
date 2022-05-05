@@ -8,7 +8,7 @@ module.exports = {
             user: "a0493480_insidebysana",
             password: "ZSUQq4Ee",
             database: "a0493480_old_insidebysana"
-            // database: 'a0493480_insidebysana',
+            // database: 'a0493480_new_insidebysana',
         },
         migrations: {
             directory: `${__dirname}/database/migrations`

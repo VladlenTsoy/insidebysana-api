@@ -52,11 +52,17 @@ const Edit = async (req, res) => {
     const {id} = req.params
     const {full_name, email, password, access} = req.body
     const data: any = {full_name, email, access}
-    //
+            //
     if (password && password.trim() !== "") data.password = password
     //
     const user = await (data.password ? UserPassword : User).query().updateAndFetchById(id, data)
     return res.send(user)
 }
 
-export default {GetAllPaginate, CreateValidate, Create, Edit}
+const Delete = async (req, res) => {
+    const {id} = req.params
+    await User.query().deleteById(id)
+    return res.send({status: "success"})
+}
+
+export default {GetAllPaginate, CreateValidate, Create, Edit, Delete}
