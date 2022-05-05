@@ -2,7 +2,7 @@ export const defaultJobOptions = {
     // removeOnComplete: true,
     // removeOnFail: false
     redis: {
-        url: process.env.REDISCLOUD_URL
+        path: process.env.REDISCLOUD_URL
         // port: Number(process.env.REDIS_PORT),
         // host: process.env.REDIS_HOST
     }
