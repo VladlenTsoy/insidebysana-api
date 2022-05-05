@@ -12,15 +12,11 @@ const queueNames = [
 
 const defaultHostConfig = {
     hostId: "redis",
-    redis:
-        process.env.APP_MODE === "development"
-            ? {
-                  host: process.env.REDIS_HOST,
-                  port: Number(process.env.REDIS_PORT)
-              }
-            : {
-                  path: process.env.REDIS_HOST
-              }
+    redis: {
+        host: process.env.REDIS_HOST,
+        port: Number(process.env.REDIS_PORT)
+    }
+
 }
 
 export const arena = Arena(
