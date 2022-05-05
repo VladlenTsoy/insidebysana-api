@@ -13,8 +13,9 @@ const queueNames = [
 const defaultHostConfig = {
     hostId: "redis",
     redis: {
-        host: process.env.REDIS_HOST,
-        port: Number(process.env.REDIS_PORT)
+        url: process.env.REDISCLOUD_URL
+        // host: process.env.REDIS_HOST,
+        // port: Number(process.env.REDIS_PORT)
     }
 
 }
