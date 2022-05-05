@@ -5,7 +5,7 @@ import {io} from "config/socket.config"
 
 const port = normalizePort(process.env.PORT || "8000")
 console.log(port)
-app.set("port", port)
+app.set("port", 80)
 
 const server = http.createServer(app)
 
