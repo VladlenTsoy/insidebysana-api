@@ -4,10 +4,10 @@ module.exports = {
         version: "5.8",
         jsonDatatype: "JSON",
         connection: {
-            host: "141.8.192.26",
-            user: "a0493480_insidebysana",
-            password: "ZSUQq4Ee",
-            database: "a0493480_old_insidebysana"
+            host: process.env.DB_HOST || "141.8.192.26",
+            user: process.env.DB_LOGIN || "a0493480_insidebysana",
+            password: process.env.DB_PASSWORD || "ZSUQq4Ee",
+            database: process.env.DB_TABLE || "a0493480_old_insidebysana"
             // database: 'a0493480_new_insidebysana',
         },
         migrations: {
