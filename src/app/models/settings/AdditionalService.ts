@@ -10,7 +10,7 @@ export class AdditionalService extends Model {
     updated_at: string
 
     url_image() {
-        if (this.image) return `${process.env.APP_URL}/${this.image}`
+        if (this.image) return `${process.env.APP_IMAGE_URL}/${this.image}`
     }
 
     $beforeInsert() {

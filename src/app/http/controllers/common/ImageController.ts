@@ -20,7 +20,7 @@ const Upload = async (req, res) => {
     })
     return res.send({
         loading: false,
-        imageUrl: `${process.env.APP_URL}/${imagePath}`,
+        imageUrl: `${process.env.APP_IMAGE_URL}/${imagePath}`,
         imagePath,
         imageName,
         id: time,

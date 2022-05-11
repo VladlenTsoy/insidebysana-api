@@ -68,6 +68,7 @@ const updateMessageByClientId = async (clientId, watermark, update) => {
  */
 const Webhook = async (req, res) => {
     const body = req.body
+    console.log(req.body)
     if (body.object === "page") {
         Promise.all(
             body.entry.map(async function(entry) {

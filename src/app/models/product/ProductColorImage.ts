@@ -10,7 +10,7 @@ export class ProductColorImage extends Model {
     updated_at: string
 
     url() {
-        if (this.path) return `${process.env.APP_URL}/${this.path}`
+        if (this.path) return `${process.env.APP_IMAGE_URL}/${this.path}`
     }
 
     status() {

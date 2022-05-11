@@ -10,7 +10,7 @@ export class Country extends Model {
     updated_at: string
 
     url_flag() {
-        if (this.flag) return `${process.env.APP_URL}/${this.flag}`
+        if (this.flag) return `${process.env.APP_IMAGE_URL}/${this.flag}`
     }
 
     $beforeInsert() {

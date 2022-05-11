@@ -11,7 +11,7 @@ export class PrintCategory extends Model {
 
     url_image() {
         if (this.image)
-            return `${process.env.APP_URL}/${this.image}`
+            return `${process.env.APP_IMAGE_URL}/${this.image}`
     }
 
     static get relationMappings() {

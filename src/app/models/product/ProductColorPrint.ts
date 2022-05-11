@@ -23,7 +23,7 @@ export class ProductColorPrint extends Model {
 
     url() {
         if (this.image)
-            return `${process.env.APP_URL}/${this.image}`
+            return `${process.env.APP_IMAGE_URL}/${this.image}`
     }
 
     status() {

@@ -11,7 +11,7 @@ export class Lookbook extends Model {
 
     url_image() {
         if (this.image)
-            return `${process.env.APP_URL}/${this.image}`
+            return `${process.env.APP_IMAGE_URL}/${this.image}`
     }
 
     $beforeInsert() {

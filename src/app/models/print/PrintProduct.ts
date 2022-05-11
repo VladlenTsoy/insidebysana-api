@@ -12,11 +12,11 @@ export class PrintProduct extends Model {
     updated_at: string
 
     url_image() {
-        if (this.image) return `${process.env.APP_URL}/${this.image}`
+        if (this.image) return `${process.env.APP_IMAGE_URL}/${this.image}`
     }
 
     url_thumbnail() {
-        if (this.thumbnail) return `${process.env.APP_URL}/${this.thumbnail}`
+        if (this.thumbnail) return `${process.env.APP_IMAGE_URL}/${this.thumbnail}`
     }
 
     static get relationMappings() {
