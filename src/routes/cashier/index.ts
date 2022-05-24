@@ -11,28 +11,20 @@ const router = express.Router()
 
 // Поиск товаров
 router.post("/search-products", ProductColorController.GetBySearch)
-
 // Поиск клиентов
 router.post("/clients", ClientController.GetBySearch)
-
 // Сделки
 router.post("/orders", OrderController.GetAll)
-
 // Создать заказ
 router.post("/pos/order", OrderController.Create)
-
-// Посик по SKU
+// Поиск по SKU
 router.post("/product-color/sku", ProductColorController.GetBySKU)
-
-// Доп. услуги
+// Доп. Услуги
 router.get("/additional-services", AdditionalServiceController.GetAll)
-
 // Вывод платежных систем
 router.get("/payment-methods", PaymentMethodController.GetAll)
-
 // Вывод всех категорий
 router.get("/categories", CategoryController.GetAll)
-
 // Вывод всех размеров
 router.get("/sizes", SizeController.GetAll)
 

@@ -8,7 +8,6 @@ module.exports = {
             user: process.env.DB_LOGIN || "a0493480_insidebysana",
             password: process.env.DB_PASSWORD || "ZSUQq4Ee",
             database: process.env.DB_TABLE || "a0493480_old_insidebysana"
-            // database: 'a0493480_new_insidebysana',
         },
         migrations: {
             directory: `${__dirname}/database/migrations`
