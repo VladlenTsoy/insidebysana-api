@@ -8,6 +8,7 @@ import {Category} from "models/settings/Category"
 import {ProductDiscount} from "./ProductDiscount"
 import {ProductMeasurement} from "./ProductMeasurement"
 import {ProductSize} from "./ProductSize"
+import {ProductStorage} from "./ProductStorage"
 
 export class ProductColor extends Model {
     static tableName = "product_colors"
@@ -270,6 +271,15 @@ export class ProductColor extends Model {
                 join: {
                     from: "product_colors.id",
                     to: `product_measurements.product_id`
+                }
+            },
+            storage: {
+                filter: query => query.select("id", "title"),
+                relation: Model.HasOneRelation,
+                modelClass: ProductStorage,
+                join: {
+                    from: "product_colors.storage_id",
+                    to: `product_storages.id`
                 }
             }
         }

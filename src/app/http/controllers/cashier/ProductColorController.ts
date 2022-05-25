@@ -16,7 +16,7 @@ const GetBySearch = async (req, res) => {
     }
 
     const refProductColor = ProductColor.query()
-        .withGraphFetched(`[color, discount, sizes]`)
+        .withGraphFetched(`[color, discount, sizes, storage]`)
         .whereNot("status", "archive")
         .join("products", "products.id", "product_colors.product_id")
         .select(
