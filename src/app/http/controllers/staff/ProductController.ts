@@ -34,6 +34,7 @@ const Create = async (req, res) => {
         thumbnail: null,
         status: data.status,
         tags_id: tagsId,
+        storage_id: data.storage_id,
         is_new: data.is_new
     })
     // Скидки
@@ -145,6 +146,7 @@ const GetById = async (req, res) => {
             "product_colors.tags_id",
             "product_colors.status",
             "product_colors.is_new",
+            "product_colors.storage_id",
             "products.category_id",
             "products.properties",
             "product_colors.product_id",
@@ -166,7 +168,8 @@ const EditById = async (req, res) => {
         thumbnail: null,
         status: data.status,
         tags_id: tagsId,
-        is_new: data.is_new
+        is_new: data.is_new,
+        storage_id: data.storage_id,
     })
 
     // Скидки
