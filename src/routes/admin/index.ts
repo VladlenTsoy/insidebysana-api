@@ -257,7 +257,7 @@ router.post(
 router.delete("/product-color-image/:id", ProductColorImageController.Delete)
 
 // Вывод всех мест хранений
-router.delete("/product-storages", ProductStorageController.GetAll)
+router.get("/product-storages", ProductStorageController.GetAll)
 
 
 export default router
