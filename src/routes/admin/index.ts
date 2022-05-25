@@ -24,6 +24,7 @@ import HomeProductController from "controllers/staff/HomeProductController"
 import ProductColorController from "controllers/staff/ProductColorController"
 import ProductController from "controllers/staff/ProductController"
 import ProductColorImageController from "controllers/staff/ProductColorImageController"
+import ProductStorageController from "controllers/staff/ProductStorageController"
 import multer from "multer"
 
 const upload = multer()
@@ -254,6 +255,9 @@ router.post(
 )
 // Удаление картинки
 router.delete("/product-color-image/:id", ProductColorImageController.Delete)
+
+// Вывод всех мест хранений
+router.delete("/product-storages", ProductStorageController.GetAll)
 
 
 export default router
