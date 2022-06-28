@@ -300,6 +300,7 @@ const Search = async (req, res) => {
 const GetByRecentIds = async (req, res) => {
     const {ids, productColorId} = req.body
     const products = await ProductColor.query()
+        .skipUndefined()
         .withGraphFetched(
             `[
                 discount(),
