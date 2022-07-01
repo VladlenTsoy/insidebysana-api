@@ -201,6 +201,7 @@ export class ProductColor extends Model {
                             "product_sizes.min_qty",
                             "product_sizes.cost_price"
                         )
+                        .orderBy("sizes.id", "asc")
                         .groupBy("id"),
                 relation: Model.HasManyRelation,
                 modelClass: ProductSize,
