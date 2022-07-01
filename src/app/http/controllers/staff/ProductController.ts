@@ -116,7 +116,7 @@ const Create = async (req, res) => {
     if (data.measurements)
         await ProductMeasurementService.CreateOrUpdate(
             data.measurements,
-            productColor.id
+            productColor.product_id
         )
     // Позиция на главной странице
     if (data.home_position)
@@ -269,7 +269,7 @@ const EditById = async (req, res) => {
     if (data.measurements)
         await ProductMeasurementService.CreateOrUpdate(
             data.measurements,
-            productColor.id
+            productColor.product_id
         )
     // Позиция на главной странице
     if (data.home_position) {

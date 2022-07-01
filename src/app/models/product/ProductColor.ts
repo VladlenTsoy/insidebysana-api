@@ -270,7 +270,7 @@ export class ProductColor extends Model {
                 relation: Model.HasManyRelation,
                 modelClass: ProductMeasurement,
                 join: {
-                    from: "product_colors.id",
+                    from: "product_colors.product_id",
                     to: `product_measurements.product_id`
                 }
             },
