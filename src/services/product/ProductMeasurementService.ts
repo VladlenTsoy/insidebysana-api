@@ -8,6 +8,12 @@ import {ProductMeasurement} from "models/product/ProductMeasurement"
  * @constructor
  */
 const CreateOrUpdate = async (measurements: any, productId) => {
+    const measurementIds = measurements.filter(measurement => !!measurement.id).map(measurement => measurement.id)
+    await ProductMeasurement.query()
+        .where({product_id: productId})
+        .whereNotIn("id", measurementIds)
+        .delete()
+
     await Promise.all(
         Object.values(measurements).map(async (measurement: any) =>
             measurement.id ?
