@@ -31,19 +31,30 @@ function getFilesizeInBytes(filename) {
     return stats.size
 }
 
+type UploadImageType = (data: {
+    folderPath: string
+    imagePatch: string
+    fileImage: string | Buffer
+    nameFile?: string
+    width?: number
+    quality?: number
+}) => Promise<[string, string, number]>
+
 /**
  * Сохранение изображения
  * @param {*} config
  * @returns
  */
-const UploadImage = async ({
-                               folderPath,
-                               imagePatch,
-                               fileImage,
-                               nameFile = "image",
-                               width = 1400,
-                               quality = 80
-                           }) => {
+const UploadImage: UploadImageType = async (
+    {
+        folderPath,
+        imagePatch,
+        fileImage,
+        nameFile = "image",
+        width = null,
+        quality = 100
+    }
+) => {
     // Путь к папке
     const fullFolderPath = path.join(__dirname, folderPath)
     // Создание папки
@@ -58,10 +69,6 @@ const UploadImage = async ({
             )
             : fileImage.buffer
 
-    // Чтение картинки
-    // const image = await Jimp.read(buf)
-    // // Расширение файла
-    // const ext = image.getExtension()
     const ext = "webp"
     // Название файла
     const imageName = `${nameFile}.${moment().valueOf()}.${ext}`
@@ -69,17 +76,10 @@ const UploadImage = async ({
     const imagePath = `${imagePatch}/${imageName}`
 
     await sharp(buf)
-        .webp()
+        .webp({quality: quality})
         .resize(width)
         .toFile(path.join(fullFolderPath, imageName))
 
-    // Сжатие картинки
-    // await image.quality(quality)
-    // // Изменение размера картинки
-    // if (image.getWidth() > width) await image.resize(width, Jimp.AUTO)
-    // // Сохранение
-    // await image.writeAsync(path.join(fullFolderPath, imageName))
-    // Узнать размер
     const sizeBytes = getFilesizeInBytes(
         path.join(fullFolderPath, imageName)
     )
