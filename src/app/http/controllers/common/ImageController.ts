@@ -16,7 +16,9 @@ const Upload = async (req, res) => {
         folderPath: `${PATH_TO_FOLDER_IMAGES}`,
         imagePatch: `${PATH_TO_IMAGE}`,
         fileImage: image,
-        nameFile: time
+        nameFile: time,
+        width: 900,
+        quality: 99
     })
     return res.send({
         loading: false,

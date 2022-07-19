@@ -76,7 +76,7 @@ const UploadImage: UploadImageType = async (
     const imagePath = `${imagePatch}/${imageName}`
 
     await sharp(buf)
-        .webp({quality: quality})
+        .webp({quality})
         .resize(width)
         .toFile(path.join(fullFolderPath, imageName))
 
