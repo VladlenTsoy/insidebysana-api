@@ -10,7 +10,7 @@ import {Banner} from "models/settings/Banner"
 const GetAll = async (req, res) => {
     const banners = await Banner.query()
         .orderBy("created_at", "desc")
-        .select("id", "title", "image", "button_link", "button_title")
+        .select("id", "title", "image", "image_mobile", "button_link", "button_title")
 
     return res.send(banners)
 }
