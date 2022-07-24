@@ -4,6 +4,7 @@ exports.up = function(knex) {
         table.increments('id')
         table.string('title').notNullable()
         table.string('image')
+        table.string('image_mobile')
         table.string('button_title').notNullable()
         table.string('button_link').notNullable()
         table.timestamps(true, true);

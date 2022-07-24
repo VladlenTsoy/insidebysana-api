@@ -13,7 +13,7 @@ const PATH_TO_IMAGE = "images/banners"
  * @constructor
  */
 const GetAll = async (req, res) => {
-    const banners = await Banner.query().select("id", "title", "image", "button_link", "button_title")
+    const banners = await Banner.query().select("id", "title", "image", "image_mobile", "button_link", "button_title")
     return res.send(banners)
 }
 
@@ -36,16 +36,22 @@ const Create = async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) return res.status(422).json({errors: errors.array()})
 
-    const {title, url_image, button_link, button_title} = req.body
+    const {title, url_image, url_image_mobile, button_link, button_title} = req.body
     const bannerRef = await Banner.query<any>().insertAndFetch({title, button_link, button_title})
     const [imagePath] = await ImageService.UploadImage({
         folderPath: `${PATH_TO_FOLDER_IMAGES}/${bannerRef.id}`,
         imagePatch: `${PATH_TO_IMAGE}/${bannerRef.id}`,
         fileImage: url_image
     })
-    const banner = await Banner.query<any>()
+    const [imageMobilePath] = await ImageService.UploadImage({
+        folderPath: `${PATH_TO_FOLDER_IMAGES}/${bannerRef.id}/mobile`,
+        imagePatch: `${PATH_TO_IMAGE}/${bannerRef.id}/mobile`,
+        fileImage: url_image_mobile,
+        width: 700
+    })
+    const banner = await Banner.query()
         .select("id", "title", "image", "button_link", "button_title")
-        .updateAndFetchById(bannerRef.id, {image: imagePath})
+        .updateAndFetchById(bannerRef.id, {image: imagePath, image_mobile: imageMobilePath})
     return res.send(banner)
 }
 
@@ -62,9 +68,9 @@ const EditById = async (req, res) => {
     if (!errors.isEmpty()) return res.status(422).json({errors: errors.array()})
 
     const {id} = req.params
-    const {title, url_image, button_link, button_title} = req.body
+    const {title, url_image, url_image_mobile, button_link, button_title} = req.body
     const data: any = {title, button_link, button_title}
-    console.log(url_image)
+
     if (!url_image.startsWith("http")) {
         const [imagePath] = await ImageService.UploadImage({
             folderPath: `${PATH_TO_FOLDER_IMAGES}/${id}`,
@@ -73,6 +79,17 @@ const EditById = async (req, res) => {
         })
         data.image = imagePath
         await ImageService.DeleteImagesExceptCurrent(`${PATH_TO_FOLDER_IMAGES}/${id}`, imagePath)
+    }
+
+    if (!url_image_mobile.startsWith("http")) {
+        const [imageMobilePath] = await ImageService.UploadImage({
+            folderPath: `${PATH_TO_FOLDER_IMAGES}/${id}/mobile`,
+            imagePatch: `${PATH_TO_IMAGE}/${id}/mobile`,
+            fileImage: url_image_mobile,
+            width: 700
+        })
+        data.image_mobile = imageMobilePath
+        await ImageService.DeleteImagesExceptCurrent(`${PATH_TO_FOLDER_IMAGES}/${id}/mobile`, imageMobilePath)
     }
     const banner = await Banner.query().updateAndFetchById(id, data)
     return res.send(banner)
